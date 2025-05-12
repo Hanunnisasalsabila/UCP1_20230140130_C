@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitur Unggulan - NightOwl</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="js/music-player.js"></script>
+    <script src="js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        /* Features Page Specific Styles */
+        .features-hero {
+            text-align: center;
+            padding: 6rem 0 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .features-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(76, 201, 240, 0.8) 0%, rgba(67, 97, 238, 0.8) 100%);
+            z-index: -1;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+        }
+        
+        .features-hero h1 {
+            font-size: 3.5rem;
+            color: white;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .features-hero p {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.9);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        .features-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .tab-button {
+            padding: 0.8rem 1.8rem;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .tab-button:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .tab-button.active {
+            background: white;
+            color: var(--primary-color);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin: 3rem 0;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .feature-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .feature-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .feature-card:hover .feature-image img {
+            transform: scale(1.05);
+        }
+        
+        .feature-content {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .feature-badge {
+            display: inline-block;
+            background: var(--accent-color);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            align-self: flex-start;
+        }
+        
+        .feature-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        
+        .feature-content p {
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+        
+        .feature-link {
+            color: var(--accent-color);
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-link i {
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-link:hover {
+            color: white;
+        }
+        
+        .feature-link:hover i {
+            transform: translateX(5px);
+        }
+        
+        .demo-section {
+            margin: 5rem 0;
+            text-align: center;
+        }
+        
+        .demo-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: white;
+        }
+        
+        .demo-video {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .demo-video iframe {
+            width: 100%;
+            height: 450px;
+            border: none;
+        }
+        
+        @media (max-width: 768px) {
+            .features-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .demo-video iframe {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="image/logo.jpg" alt="NightOwl Logo">
+                <span class="logo-text">NightOwl</span>
+            </div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="features.html">Fitur</a></li>
+                <li><a href="contact.html">Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <section class="features-hero">
+            <div class="container">
+                <h1>Fitur Unggulan</h1>
+                <p>Eksplorasi berbagai fitur canggih yang dirancang untuk membuat pengalaman belajar Anda lebih efektif dan menyenangkan</p>
+                <div class="features-tabs">
+                    <button class="tab-button active">Semua Fitur</button>
+                    <button class="tab-button">Pembelajaran</button>
+                    <button class="tab-button">Evaluasi</button>
+                    <button class="tab-button">Tools</button>
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-image">
+                        <img src="image/fitur 1.jpg" alt="Pembelajaran Interaktif">
+                    </div>
+                    <div class="feature-content">
+                        <span class="feature-badge">Pembelajaran</span>
+                        <h3>Kelas Interaktif</h3>
+                        <p>Sesi belajar live dengan pengajar profesional dilengkapi whiteboard digital, breakout rooms, dan real-time collaboration tools untuk pengalaman belajar yang imersif.</p>
+                        <a href="#" class="feature-link">Pelajari lebih lanjut <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-image">
+                        <img src="image/fitur 2.jpg" alt="Bank Soal">
+                    </div>
+                    <div class="feature-content">
+                        <span class="feature-badge">Evaluasi</span>
+                        <h3>Bank Soal Adaptif</h3>
+                        <p>Lebih dari 10,000 soal dengan tingkat kesulitan yang menyesuaikan kemampuan Anda, dilengkapi pembahasan detail dan analisis kelemahan.</p>
+                        <a href="#" class="feature-link">Pelajari lebih lanjut <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-image">
+                        <img src="image/fitur 3.jpg" alt="Progress Tracking">
+                    </div>
+                    <div class="feature-content">
+                        <span class="feature-badge">Tools</span>
+                        <h3>Pelacakan Kemajuan</h3>
+                        <p>Dashboard analitik canggih yang memvisualisasikan perkembangan belajar Anda dengan metrik yang komprehensif dan actionable insights.</p>
+                        <a href="#" class="feature-link">Pelajari lebih lanjut <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-image">
+                        <img src="image/fitur 4.jpg" alt="Koding">
+                    </div>
+                    <div class="feature-content">
+                        <span class="feature-badge">Pembelajaran</span>
+                        <h3>Lab Koding Online</h3>
+                        <p>Environment koding langsung di browser dengan 20+ bahasa pemrograman, dilengkapi debugger dan fitur collaborative coding.</p>
+                        <a href="#" class="feature-link">Pelajari lebih lanjut <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-image">
+                        <img src="image/fitur 5.jpg" alt="Sertifikat">
+                    </div>
+                    <div class="feature-content">
+                        <span class="feature-badge">Tools</span>
+                        <h3>Sertifikat Digital</h3>
+                        <p>Sertifikat berbasis blockchain yang dapat diverifikasi secara online dan terintegrasi dengan platform LinkedIn untuk portofolio digital Anda.</p>
+                        <a href="#" class="feature-link">Pelajari lebih lanjut <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-image">
+                        <img src="image/fitur 6.jpg" alt="Mobile App">
+                    </div>
+                    <div class="feature-content">
+                        <span class="feature-badge">Tools</span>
+                        <h3>Aplikasi Mobile</h3>
+                        <p>Akses semua fitur pembelajaran melalui aplikasi mobile dengan fitur download materi untuk belajar offline dan notifikasi pengingat belajar.</p>
+                        <a href="#" class="feature-link">Pelajari lebih lanjut <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <section class="demo-section">
+                <h2>Lihat NightOwl dalam Aksi</h2>
+                <div class="demo-video">
+                    <iframe width="560" height="315" src="image/Kenapa 1+1=2 Gak 3, 4, atau 5 .mp4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 NightOwl. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+
+        const tabButtons = document.querySelectorAll('.tab-button');
+        
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+            });
+        });
+    </script>
+</body>
+</html>
